@@ -127,6 +127,14 @@ exports.Prisma.TaskScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  description: 'description',
+  userId: 'userId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -147,9 +155,18 @@ exports.TaskStatus = exports.$Enums.TaskStatus = {
   DONE: 'DONE'
 };
 
+exports.NotificationType = exports.$Enums.NotificationType = {
+  USER_CREATED: 'USER_CREATED',
+  TASK_CREATED: 'TASK_CREATED',
+  TASK_UPDATED: 'TASK_UPDATED',
+  TASK_STATUS_UPDATED: 'TASK_STATUS_UPDATED',
+  TASK_DELETED: 'TASK_DELETED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
-  Task: 'Task'
+  Task: 'Task',
+  Notification: 'Notification'
 };
 
 /**

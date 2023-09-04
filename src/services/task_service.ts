@@ -1,14 +1,18 @@
 import { NextFunction, Request, Response } from "express";
 import { PrismaClient } from "../../orm";
+import { NotificationType } from "../utils/app_enums";
 import CustomError from "../utils/error_handler";
 import HttpStatusCode from "../utils/http_status_code";
 import { ResponseHandler } from "../utils/response_handler";
+import { NotificationService } from "./notification_service";
 
 export class TaskService {
   private db: PrismaClient;
+  private notificationService: NotificationService;
 
   constructor(prisma: PrismaClient) {
     this.db = prisma;
+    this.notificationService = new NotificationService(prisma);
   }
 
   async getAllTasksForUser(res: Response, next: NextFunction, user: any) {
@@ -106,6 +110,25 @@ export class TaskService {
         );
         return next(err);
       }
+      // creating a notification for task created successfully
+      const notificationData = {
+        type: NotificationType.TASK_CREATED,
+        description: "Task created successfully",
+      };
+      const notification = await this.notificationService.createNotification(
+        res,
+        next,
+        user.id,
+        notificationData
+      );
+      if (!notification) {
+        const err = new CustomError(
+          "Error while notifying the user",
+          HttpStatusCode.INTERNAL_SERVER_ERROR,
+          "INTERNAL SERVER ERROR"
+        );
+        return next(err);
+      }
       return ResponseHandler.successResponse(task, res, HttpStatusCode.CREATED);
     } catch (error: any) {
       console.log("error while adding the task:");
@@ -151,6 +174,25 @@ export class TaskService {
           "Unable to update task for the user",
           HttpStatusCode.BAD_REQUEST,
           "BAD_REQUEST"
+        );
+        return next(err);
+      }
+      // creating a notification for task updated successfully
+      const notificationData = {
+        type: NotificationType.TASK_UPDATED,
+        description: "Task updated successfully",
+      };
+      const notification = await this.notificationService.createNotification(
+        res,
+        next,
+        user.id,
+        notificationData
+      );
+      if (!notification) {
+        const err = new CustomError(
+          "Error while notifying the user",
+          HttpStatusCode.INTERNAL_SERVER_ERROR,
+          "INTERNAL SERVER ERROR"
         );
         return next(err);
       }
@@ -211,6 +253,25 @@ export class TaskService {
         );
         return next(err);
       }
+      // creating a notification for task status updated successfully
+      const notificationData = {
+        type: NotificationType.TASK_STATUS_UPDATED,
+        description: "Task Status successfully",
+      };
+      const notification = await this.notificationService.createNotification(
+        res,
+        next,
+        user.id,
+        notificationData
+      );
+      if (!notification) {
+        const err = new CustomError(
+          "Error while notifying the user",
+          HttpStatusCode.INTERNAL_SERVER_ERROR,
+          "INTERNAL SERVER ERROR"
+        );
+        return next(err);
+      }
       return ResponseHandler.successResponse(
         updatedTask,
         res,
@@ -262,6 +323,25 @@ export class TaskService {
           "Unable to delete the task",
           HttpStatusCode.BAD_REQUEST,
           "BAD_REQUEST"
+        );
+        return next(err);
+      }
+      // creating a notification for task deleted successfully
+      const notificationData = {
+        type: NotificationType.TASK_DELETED,
+        description: "Task deleted successfully",
+      };
+      const notification = await this.notificationService.createNotification(
+        res,
+        next,
+        user.id,
+        notificationData
+      );
+      if (!notification) {
+        const err = new CustomError(
+          "Error while notifying the user",
+          HttpStatusCode.INTERNAL_SERVER_ERROR,
+          "INTERNAL SERVER ERROR"
         );
         return next(err);
       }

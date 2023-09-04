@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response, Router } from "express";
 import Joi from "joi";
 import { PrismaClient } from "../../orm";
-import { TaskService } from "../services/task_service";
+import { TaskService } from "../services";
 import CustomError from "../utils/error_handler";
 import HttpStatusCode from "../utils/http_status_code";
 import { validateUserMiddleware } from "../utils/middlewares";

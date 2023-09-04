@@ -34,6 +34,20 @@ export const schemas = {
       .required(),
   }),
 
+  createNotificationSchema: Joi.object().keys({
+    type: Joi.string()
+      .label("type")
+      .valid(
+        "USER_CREATED",
+        "TASK_CREATED",
+        "TASK_UPDATED",
+        "TASK_STATUS_UPDATED",
+        "TASK_DELETED"
+      )
+      .required(),
+    description: Joi.string().label("description").required(),
+  }),
+
   userSchema: {
     id: true,
     email: true,

@@ -2,7 +2,11 @@ import bodyParser from "body-parser";
 import express, { Application, NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import { PrismaClient } from "../orm";
-import { AuthController, TaskController } from "./controllers";
+import {
+  AuthController,
+  NotificationController,
+  TaskController,
+} from "./controllers";
 import Database from "./database/database";
 import { errorMiddlware } from "./utils/middlewares";
 import * as dotenv from "dotenv";
@@ -10,9 +14,11 @@ import * as dotenv from "dotenv";
 class ExpressApp {
   public app: Application;
   private prisma: PrismaClient;
+  private static BASE_URL: string;
 
   constructor() {
     dotenv.config({ path: __dirname + "/.env" });
+    ExpressApp.BASE_URL = "/api/v1/";
     this.app = express();
     this.prisma = Database.getInstance().getDB();
     this.config();
@@ -30,8 +36,18 @@ class ExpressApp {
     this.app.use(morgan("dev"));
     // initialize routes
 
-    this.app.use("/api/v1/auth", new AuthController(this.prisma).getRouter());
-    this.app.use("/api/v1/tasks", new TaskController(this.prisma).getRouter());
+    this.app.use(
+      `${ExpressApp.BASE_URL}auth`,
+      new AuthController(this.prisma).getRouter()
+    );
+    this.app.use(
+      `${ExpressApp.BASE_URL}tasks`,
+      new TaskController(this.prisma).getRouter()
+    );
+    this.app.use(
+      `${ExpressApp.BASE_URL}notifications`,
+      new NotificationController(this.prisma).getRouter()
+    );
 
     this.app.use(errorMiddlware);
   }

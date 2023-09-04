@@ -9,12 +9,16 @@ import {
 import { ResponseHandler } from "../utils/response_handler";
 import { schemas } from "../utils/schemas";
 import * as jwt from "jsonwebtoken";
+import { NotificationService } from "./notification_service";
+import { NotificationType } from "../utils/app_enums";
 
 export class AuthService {
   private db: PrismaClient;
+  private notificationService: NotificationService;
 
   constructor(prisma: PrismaClient) {
     this.db = prisma;
+    this.notificationService = new NotificationService(prisma);
   }
 
   async registerUser(res: Response, next: NextFunction, data: any) {
@@ -38,6 +42,25 @@ export class AuthService {
           "Unable to register the user",
           HttpStatusCode.BAD_REQUEST,
           "BAD_REQUEST"
+        );
+        return next(err);
+      }
+      // creating a notification for user created successfully
+      const notificationData = {
+        type: NotificationType.USER_CREATED,
+        description: "User created successfully",
+      };
+      const notification = await this.notificationService.createNotification(
+        res,
+        next,
+        user.id,
+        notificationData
+      );
+      if (!notification) {
+        const err = new CustomError(
+          "Error while notifying the user",
+          HttpStatusCode.INTERNAL_SERVER_ERROR,
+          "INTERNAL SERVER ERROR"
         );
         return next(err);
       }

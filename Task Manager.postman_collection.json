@@ -1,0 +1,404 @@
+{
+	"info": {
+		"_postman_id": "7c78e70c-2105-46e1-ae9b-98303d746c2c",
+		"name": "Task Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28720712"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "dalia@microsoft.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Pass@1234",
+									"type": "text"
+								},
+								{
+									"key": "firstName",
+									"value": "Dalia",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "angela@brewery.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Pass@1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "task",
+			"item": [
+				{
+					"name": "Get all tasks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMWM2NzliLWQzNGUtNDg3Yy1iMWY0LWIxYjM4MTNkZmFmOCIsImVtYWlsIjoiYW5nZWxhQGJyZXdlcnkuY29tIiwiaWF0IjoxNjkzNzQ0NzA1LCJleHAiOjE2OTM4MzExMDV9.VSPnB_c8wmSl4zx41SoNEndidofiU9j_-DoJ_Fhcg-w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get task by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMWM2NzliLWQzNGUtNDg3Yy1iMWY0LWIxYjM4MTNkZmFmOCIsImVtYWlsIjoiYW5nZWxhQGJyZXdlcnkuY29tIiwiaWF0IjoxNjkzNTQ2MTQ1LCJleHAiOjE2OTM2MzI1NDV9.yJDcbHj3PdUZJw2zREUoT6I2ZmdE5-uNXyl_2T9YURA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/tasks/a138d1b7-a330-49ce-a442-a2eaeed13061",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"tasks",
+								"a138d1b7-a330-49ce-a442-a2eaeed13061"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMWM2NzliLWQzNGUtNDg3Yy1iMWY0LWIxYjM4MTNkZmFmOCIsImVtYWlsIjoiYW5nZWxhQGJyZXdlcnkuY29tIiwiaWF0IjoxNjkzNzQ0NzA1LCJleHAiOjE2OTM4MzExMDV9.VSPnB_c8wmSl4zx41SoNEndidofiU9j_-DoJ_Fhcg-w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Learn Microservices",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update task by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMWM2NzliLWQzNGUtNDg3Yy1iMWY0LWIxYjM4MTNkZmFmOCIsImVtYWlsIjoiYW5nZWxhQGJyZXdlcnkuY29tIiwiaWF0IjoxNjkzNTY1OTM0LCJleHAiOjE2OTM2NTIzMzR9.xDYmd_RLuCrEuvf-FGG8UBWNkt0iqO_kniffr9xg36E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Go to study",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Study backend development",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "DONE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/tasks/e4eaa7d9-442e-4292-8d8d-8a5eb386a48c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"tasks",
+								"e4eaa7d9-442e-4292-8d8d-8a5eb386a48c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update task status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMWM2NzliLWQzNGUtNDg3Yy1iMWY0LWIxYjM4MTNkZmFmOCIsImVtYWlsIjoiYW5nZWxhQGJyZXdlcnkuY29tIiwiaWF0IjoxNjkzNzQ0NzA1LCJleHAiOjE2OTM4MzExMDV9.VSPnB_c8wmSl4zx41SoNEndidofiU9j_-DoJ_Fhcg-w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "IN_PROGRESS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/tasks/a90ce799-332a-4109-833d-10e986c82770/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"tasks",
+								"a90ce799-332a-4109-833d-10e986c82770",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete task by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMWM2NzliLWQzNGUtNDg3Yy1iMWY0LWIxYjM4MTNkZmFmOCIsImVtYWlsIjoiYW5nZWxhQGJyZXdlcnkuY29tIiwiaWF0IjoxNjkzNzQ0NzA1LCJleHAiOjE2OTM4MzExMDV9.VSPnB_c8wmSl4zx41SoNEndidofiU9j_-DoJ_Fhcg-w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/tasks/a138d1b7-a330-49ce-a442-a2eaeed13061",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"tasks",
+								"a138d1b7-a330-49ce-a442-a2eaeed13061"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "notifications",
+			"item": [
+				{
+					"name": "Get all notifications",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMWM2NzliLWQzNGUtNDg3Yy1iMWY0LWIxYjM4MTNkZmFmOCIsImVtYWlsIjoiYW5nZWxhQGJyZXdlcnkuY29tIiwiaWF0IjoxNjkzNzk2MjM3LCJleHAiOjE2OTM4ODI2Mzd9.DNGwhw4h8jc_U4FOMg9ashVpD1l5hAyXe4phV5WvCAk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/notifications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get notification by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAwMWM2NzliLWQzNGUtNDg3Yy1iMWY0LWIxYjM4MTNkZmFmOCIsImVtYWlsIjoiYW5nZWxhQGJyZXdlcnkuY29tIiwiaWF0IjoxNjkzNzk2MjM3LCJleHAiOjE2OTM4ODI2Mzd9.DNGwhw4h8jc_U4FOMg9ashVpD1l5hAyXe4phV5WvCAk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/notifications/14317c52-b20a-495e-a6f2-7848725e6ee2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"notifications",
+								"14317c52-b20a-495e-a6f2-7848725e6ee2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
